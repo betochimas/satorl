@@ -1,0 +1,41 @@
+# === Claude Code (kept local, never committed) ===
+CLAUDE.md
+.claude/
+docs/
+
+# === Codex (kept local, never committed) ===
+AGENTS.md
+.codex/
+
+# === Local testing scratch & generated data ===
+temp/
+# Ad-hoc generated datasets at the repo root (e.g. `satorl generate -o ./out.csv`).
+# Test fixtures under tests/ are NOT matched by this root-only rule.
+/*.csv
+
+# === macOS ===
+.DS_Store
+
+# === Python ===
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# === Virtual environments ===
+.venv/
+venv/
+env/
+
+# === Test / coverage / lint caches ===
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
