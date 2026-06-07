@@ -11,10 +11,10 @@ class GaussianGenerator(Generator):
     def __init__(
         self,
         *,
-        columns,
-        mean,
-        std,
-        seed
+        columns: int = 3,
+        mean: float = 0.0,
+        std: float = 1.0,
+        seed: int | None = None,
     ) -> None:
         self.columns = columns
         self.mean = mean

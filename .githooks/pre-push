@@ -1,0 +1,25 @@
+#!/bin/sh
+# Pre-push gate: lint + tests must pass before a push is allowed.
+#
+# Enabled per-clone with:  git config core.hooksPath .githooks
+#
+# Runs through the project venv's interpreter explicitly, because the shell
+# default `python` on this machine is Anaconda, not .venv — calling
+# `.venv/bin/python -m ...` keeps the gate on the right interpreter.
+set -e
+
+cd "$(git rev-parse --show-toplevel)"
+
+if [ -x ".venv/bin/python" ]; then
+    PY=".venv/bin/python"
+else
+    PY="python"
+fi
+
+echo "pre-push › ruff check"
+"$PY" -m ruff check .
+
+echo "pre-push › pytest"
+"$PY" -m pytest
+
+echo "pre-push › all checks passed"
