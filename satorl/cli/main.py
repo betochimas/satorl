@@ -1,6 +1,7 @@
 import typer
 
 from satorl.cli.commands import generate
+from satorl.cli.commands.analyze import analyze_command
 
 app = typer.Typer(
     name="satorl",
@@ -10,6 +11,7 @@ app = typer.Typer(
 )
 
 app.add_typer(generate.app, name="generate")
+app.command("analyze")(analyze_command)
 
 if __name__ == "__main__":      # lets you run `python -m satorl.cli.main` while developing
     app()

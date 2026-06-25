@@ -1,8 +1,6 @@
-import io
 from urllib.parse import urlparse
 
 import boto3
-import pandas as pd
 
 from satorl.storage.base import Storage
 
@@ -11,11 +9,9 @@ class S3Storage(Storage):
         # injectable client -> trivial to mock in tests (e.g. moto)
         self._client = client or boto3.client("s3")
 
-    def write(self, df: pd.DataFrame, destination: str) -> str:
+    def write_text(self, content: str, destination: str) -> str:
         bucket, key = _parse_s3_uri(destination)
-        buffer = io.StringIO()
-        df.to_csv(buffer, index=False)
-        self._client.put_object(Bucket=bucket, Key=key, Body=buffer.getvalue())
+        self._client.put_object(Bucket=bucket, Key=key, Body=content)
         return destination
 
 def _parse_s3_uri(uri: str) -> tuple[str, str]:

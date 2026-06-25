@@ -1,3 +1,5 @@
+from typing import Any
+
 import numpy as np
 import pandas as pd
 
@@ -20,6 +22,9 @@ class GaussianGenerator(Generator):
         self.mean = mean
         self.std = std
         self.seed = seed
+
+    def params(self) -> dict[str, Any]:
+        return {"columns": self.columns, "mean": self.mean, "std": self.std}
 
     def generate(self, rows: int) -> pd.DataFrame:
         rng = np.random.default_rng(self.seed)

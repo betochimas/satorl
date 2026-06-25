@@ -1,12 +1,10 @@
 from pathlib import Path
 
-import pandas as pd
-
 from satorl.storage.base import Storage
 
 class LocalStorage(Storage):
-    def write(self, df: pd.DataFrame, destination: str) -> str:
+    def write_text(self, content: str, destination: str) -> str:
         path = Path(destination)
         path.parent.mkdir(parents=True, exist_ok=True)
-        df.to_csv(path, index=False)
+        path.write_text(content)
         return str(path.resolve())
